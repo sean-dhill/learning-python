@@ -1,5 +1,6 @@
 import string
 import random
+import platform
 
 lowercase_letters = list(string.ascii_lowercase)
 uppercase_letters = list(string.ascii_uppercase)
@@ -44,6 +45,31 @@ random.shuffle(password_characters)
 final_password = ''.join(password_characters)
 
 print(f"Your final password with {number_letters} letters, {number_digits} digits and {number_symbols} symbols is: ", final_password)
+
+
+#Platform specific handling for copying to clipboard
+def copy_to_clipboard(password):
+    if platform.system() == "Windows":
+        try:
+            import pyperclip
+            pyperclip.copy(password)
+            print("Password copied to clipboard!")
+        except ImportError:
+            print("Pyperclip not installed, Run: pip install pyperclip")
+
+    elif platform.system == "Linux":
+        try:
+            import subprocess
+            subprocess.run("clip.exe", text=True, input=password)
+            print("Passord copied to clipboard via clip.exe")
+        except Exception as e:
+            print(f"⚠️ Failed to copy to clipboard on Linux: {e}")
+    else:
+        print("⚠️ Clipboard copy not supported on this OS")
+
+copy_to_clipboard(final_password)
+
+    
 
 
 
