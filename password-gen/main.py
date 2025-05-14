@@ -57,7 +57,7 @@ def copy_to_clipboard(password):
         except ImportError:
             print("Pyperclip not installed, Run: pip install pyperclip")
 
-    elif platform.system == "Linux":
+    elif platform.system() == "Linux":
         try:
             import subprocess
             subprocess.run("clip.exe", text=True, input=password)
