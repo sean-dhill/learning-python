@@ -36,12 +36,23 @@ operations = {
 continue_loop = True
 
 while True:
+    print(logo)
     first_number = float(input("What is the first number?: "))
-
-    operation = input("+\n-\n/ \n*\nWhat operation would you like to perform?")
-    while operation not in ("+","-","/","*"):
-        operation = input("+\n-\n/ \n*\nPlease enter a valid operation: ")
     
-    second_number = float(input("What is the next number?: "))
+    while True:
+        operation = input("+\n-\n/ \n*\nWhat operation would you like to perform?: ")
+        while operation not in ("+","-","/","*"):
+            operation = input("+\n-\n/ \n*\nPlease enter a valid operation: ")
+        
+        second_number = float(input("What is the next number?: "))
+        result = operations[operation](first_number,second_number)
 
-    print(f"Your value is {operations[operation](first_number, second_number)}")
+        print(f"{first_number} {operation} {second_number} = {operations[operation](first_number,second_number)}")
+        continue_loop = input(f"Type 'y' to continue calculating with {result}, or type 'n' to start a new calculation: ").lower()
+        while continue_loop not in ("n","y"):
+            continue_loop = input("Please enter 'y' or 'n': ")
+        if continue_loop == "y":
+            first_number = result
+        else:
+            break
+    
