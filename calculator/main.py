@@ -1,4 +1,4 @@
-logo = """
+logo = r"""
  _____________________
 |  _________________  |
 | |                0. | |  .----------------.  .----------------.  .----------------.  .----------------. 
@@ -26,3 +26,22 @@ def multiply(n1, n2):
 def divide(n1, n2):
     return n1 / n2
 
+operations = {
+    "+": add,
+    "-": subtract,
+    "/": divide,
+    "*": multiply,
+}
+
+continue_loop = True
+
+while True:
+    first_number = float(input("What is the first number?: "))
+
+    operation = input("+\n-\n/ \n*\nWhat operation would you like to perform?")
+    while operation not in ("+","-","/","*"):
+        operation = input("+\n-\n/ \n*\nPlease enter a valid operation: ")
+    
+    second_number = float(input("What is the next number?: "))
+
+    print(f"Your value is {operations[operation](first_number, second_number)}")
