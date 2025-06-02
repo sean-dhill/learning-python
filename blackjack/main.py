@@ -1,5 +1,6 @@
 import random
 
+
 logo = r"""
 .------.            _     _            _    _            _    
 |A_  _ |.          | |   | |          | |  (_)          | |   
@@ -26,13 +27,41 @@ while game_on:
         new_card = input("Please enter either 'y' or 'n': ")
     
     if new_card == 'y':
-        while new_card == 'y':
+        while True:
             player_cards.append(playing_cards[random.randint(0, len(playing_cards) - 1)])
             print(f"Your cards: {player_cards}, current score: {sum(player_cards)}")
             print(f"Computer's first card: {computer_cards}")
             if sum(player_cards) > 21:
+                print(f"Your final hand: {player_cards}, final score: {sum(player_cards)}")
+                print(f"Computer's final hand: {computer_cards}, final score: {sum(computer_cards)}")
                 print("Game over, you went over 21!")
                 game_on = False
                 break
-            new_card = input("Type 'y' to get another card, type 'n' to pass: ")
+            new_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+            if new_card == 'n':
+                break
+    
+    if sum(player_cards)<= 21:
+        while sum(computer_cards) < 17:
+            computer_cards.append(playing_cards[random.randint(0, len(playing_cards) - 1)])
+        
+        if sum(computer_cards) > 21:
+            print(f"Your final hand: {player_cards}, final score: {sum(player_cards)}")
+            print(f"Computer's final hand: {computer_cards}, final score: {sum(computer_cards)}")
+            print("Opponent went over. You win!")
+            continue_game = input("Do you want to play a game of BlackJack? Type 'y' or 'n' ")
+        
+        if sum(player_cards) < sum(computer_cards):
+            print(f"Your final hand: {player_cards}, final score: {sum(player_cards)}")
+            print(f"Computer's final hand: {computer_cards}, final score: {sum(computer_cards)}")
+            print("Opponent won!")
+            continue_game = input("Do you want to play a game of BlackJack? Type 'y' or 'n' ")
+        
+        if sum(player_cards) > sum(computer_cards):
+            print(f"Your final hand: {player_cards}, final score: {sum(player_cards)}")
+            print(f"Computer's final hand: {computer_cards}, final score: {sum(computer_cards)}")
+            print("You won!")
+            continue_game = input("Do you want to play a game of BlackJack? Type 'y' or 'n' ")
+
+
 
