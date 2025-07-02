@@ -7,21 +7,32 @@ game_over = False
 personA = game_data[random.randint(0, len(game_data) - 1)]
 personB = game_data[random.randint(0, len(game_data) - 1)]
 
+score = 0
+while game_over != True:
+    print(personA)
+    print(personB)
+    print(logo)
+    if score > 0:
+        print(f"You're right! Current score {score}")
+    
+    print(f"Compare A: {personA['name']}, a {personA['description']}, from {personA['country']}")
+    print(vs)
+    print(f"Against B: {personB['name']}, a {personB['description']}, from {personB['country']}")
 
+    choice = input("Who has more followers? Type 'A' or 'B'").lower()
 
-print(f"Compare A: {personA['name']}, a {personA['description']}, from {personA['country']}")
+    if personA['follower_count'] < personB['follower_count']:
+        winner = 'b'
+        winning_person = personB
+    else:
+        winner = 'a'
+        winning_person = personA
 
-print(f"Against B: {personB['name']}, a {personB['description']}, from {personB['country']}")
-
-choice = input("Who has more followers? Type 'A' or 'B'").lower()
-
-if personA['follower_count'] < personB['follower_count']:
-    winner = 'b'
-else:
-    winner = 'a'
-
-if choice == winner:
-    print(f"You won person{winner.upper()} has more followers")
-else:
-    print("You lose")
+    if choice == winner:
+        score += 1
+        personA = winning_person
+        personB = game_data[random.randint(0, len(game_data) - 1)]
+    else:
+        print("You lose")
+        game_over = True
 
