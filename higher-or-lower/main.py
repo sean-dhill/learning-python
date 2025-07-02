@@ -9,8 +9,6 @@ personB = game_data[random.randint(0, len(game_data) - 1)]
 
 score = 0
 while game_over != True:
-    print(personA)
-    print(personB)
     print(logo)
     if score > 0:
         print(f"You're right! Current score {score}")
@@ -19,7 +17,9 @@ while game_over != True:
     print(vs)
     print(f"Against B: {personB['name']}, a {personB['description']}, from {personB['country']}")
 
-    choice = input("Who has more followers? Type 'A' or 'B'").lower()
+    choice = input("Who has more followers? Type 'A' or 'B': ").lower()
+    while choice not in ('a', 'b'):
+        choice = input("Please enter 'A' or 'B': ")
 
     if personA['follower_count'] < personB['follower_count']:
         winner = 'b'
